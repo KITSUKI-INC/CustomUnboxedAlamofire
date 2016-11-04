@@ -12,7 +12,7 @@ import Unbox
 
 
 public protocol CustomUnboxed {
-    static func custom(unboxer: Unbox.Unboxer) throws -> Self?
+    static func custom<T: CustomUnboxed>(unboxer: Unbox.Unboxer) throws -> T?
 }
 
 // MARK: - Requests
