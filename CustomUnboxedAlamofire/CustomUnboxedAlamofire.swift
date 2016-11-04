@@ -12,7 +12,7 @@ import Unbox
 
 
 public protocol CustomUnboxed {
-    static func custom(unboxer: Unbox.Unboxer) -> Self
+    static func custom<T: CustomUnboxed>(unboxer: Unbox.Unboxer) throws -> T?
 }
 
 // MARK: - Requests
@@ -76,7 +76,7 @@ private extension Request {
             
             do {
                 return .success(try Unboxer.performCustomUnboxing(dictionary: json, closure: { (unboxer) -> T? in
-                    return T.custom(unboxer: unboxer)
+                    return try T.custom(unboxer: unboxer)
                 }))
             } catch let unboxError as UnboxError {
                 return .failure(CustomUnboxedError(description: unboxError.description))
@@ -128,7 +128,7 @@ private func map<T: CustomUnboxed>(_ objects: [UnboxableDictionary]) throws -> [
     
     return try objects.reduce([T]()) { container, rawValue in
         let value: T = try Unboxer.performCustomUnboxing(dictionary: rawValue, closure: { (unboxer) -> T? in
-            return T.custom(unboxer: unboxer)
+            return try T.custom(unboxer: unboxer)
         })
         return container + [value]
     }
