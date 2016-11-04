@@ -16,9 +16,9 @@ Objects you request have to conform [Unboxable](https://github.com/JohnSundell/U
 class RealmObject: Object, CustomUnboxed {
     public static func custom(unboxer: Unboxer) throws -> CustomUnboxed {
         let campany: RealmObject = RealmObject()
-        campany.identifier = try! unboxer.unbox(key: "identifier")
-        campany.name = try! unboxer.unbox(key: "name")
-        campany.phone = try! unboxer.unbox(key: "phone")
+        campany.identifier = try unboxer.unbox(key: "identifier")
+        campany.name = try unboxer.unbox(key: "name")
+        campany.phone = try unboxer.unbox(key: "phone")
         return campany
     }
 }
