@@ -1,4 +1,4 @@
-# Conception origin
+# Inspired
 [UnboxedAlamofire](https://github.com/serejahh/UnboxedAlamofire)
 
 # UnboxedAlamofire
